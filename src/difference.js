@@ -1,30 +1,28 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 const genDiff = (data) => {
-  const fileOneData = _.sortBy(Object.keys(data[0]));
-  const fileTwoData = _.sortBy(Object.keys(data[1]));
-  const diff = [];
+  const { fileOneData, fileTwoData } = data;
+  const allKeys = _.sortBy(
+    _.union(Object.keys(fileOneData), Object.keys(fileTwoData)),
+  );
 
-  fileOneData.forEach((key) => {
-    if (_.includes(fileTwoData, key)) {
-      if (data[0][key] !== data[1][key]) {
-        diff.push(`- ${key}: ${data[0][key]}`);
-        diff.push(`+ ${key}: ${data[1][key]}`);
-      } else {
-        diff.push(`  ${key}: ${data[0][key]}`);
-      }
-    } else {
-      diff.push(`- ${key}: ${data[0][key]}`);
+  const diff = allKeys.map((key) => {
+    if (!_.has(fileTwoData, key)) {
+      return `- ${key}: ${fileOneData[key]}`;
     }
+    if (!_.has(fileOneData, key)) {
+      return `+ ${key}: ${fileTwoData[key]}`;
+    }
+    if (fileOneData[key] !== fileTwoData[key]) {
+      return [
+        `- ${key}: ${fileOneData[key]}`,
+        `+ ${key}: ${fileTwoData[key]}`,
+      ].join("\n   ");
+    }
+    return `  ${key}: ${fileOneData[key]}`;
   });
 
-  fileTwoData.forEach((key) => {
-    if (!_.includes(fileOneData, key)) {
-      diff.push(`+ ${key}: ${data[1][key]}`);
-    }
-  });
-
-  return `{\n   ${diff.join('\n   ')}\n}`;
+  return `{\n   ${diff.join("\n   ")}\n}`;
 };
 
 export default genDiff;
