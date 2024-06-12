@@ -1,14 +1,17 @@
-import path from 'path';
-import { readFileSync } from 'node:fs';
+import path from "path";
+import { readFileSync } from "node:fs";
 
-const parseFile = (filePath, filePathTwo) => {
-  const fullPathOne = path.resolve(filePath);
-  const fullPathTwo = path.resolve(filePathTwo);
+const readJsonFile = (filePath) => {
+  return JSON.parse(
+    readFileSync(path.resolve(filePath), { encoding: "utf-8" }),
+  );
+};
 
-  const fileOneData = readFileSync(fullPathOne, { encoding: 'utf-8' });
-  const fileTwoData = readFileSync(fullPathTwo, { encoding: 'utf-8' });
-
-  return [JSON.parse(fileOneData), JSON.parse(fileTwoData)];
+const parseFile = (fileOne, fileTwo) => {
+  return {
+    fileOneData: readJsonFile(fileOne),
+    fileTwoData: readJsonFile(fileTwo),
+  };
 };
 
 export default parseFile;
