@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'url';
 import parseFile from '../src/parser.js';
 import genDiff from '../src/difference.js';
-import { isYaml } from '../src/utils/extensions.js';
+import isYaml from '../src/utils/extensions.js';
 import { readJsonFile, readYamlFile } from '../src/utils/readers.js';
 
 const __filename = fileURLToPath(import.meta.url);
