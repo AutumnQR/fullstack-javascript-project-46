@@ -1,10 +1,9 @@
-import genDiff from "../src/difference.js";
 import { expect, test } from "@jest/globals";
-import parseFile from "../src/parser.js";
-import path from "path";
-import { readFileSync, writeFileSync } from "node:fs";
+import path, { dirname } from "path";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+import parseFile from "../src/parser.js";
+import genDiff from "../src/difference.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,7 +47,12 @@ test("Comparison of Hexlet response and program response", () => {
 test("Check alphabetical sorting", () => {
   const data = {
     fileOneData: { b: 1, d: 2, c: 3 },
-    fileTwoData: { a: 1, b: 4, c: 3, e: 5 },
+    fileTwoData: {
+      a: 1,
+      b: 4,
+      c: 3,
+      e: 5,
+    },
   };
 
   const answer = `{\r\n${["  + a: 1", "  - b: 1", "  + b: 4", "    c: 3", "  - d: 2", "  + e: 5"].join("\r\n")}\r\n}`;
