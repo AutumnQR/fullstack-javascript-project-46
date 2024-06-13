@@ -2,9 +2,11 @@ import _ from 'lodash';
 
 const genDiff = (data) => {
   const { fileOneData, fileTwoData } = data;
-  const allKeys = _.sortBy(
-    _.union(Object.keys(fileOneData), Object.keys(fileTwoData)),
-  );
+
+  const fileOneKeys = Object.keys(fileOneData);
+  const fileTwoKeys = Object.keys(fileTwoData);
+
+  const allKeys = _.sortBy(_.union(fileOneKeys, fileTwoKeys));
 
   const diff = allKeys.map((key) => {
     if (!_.has(fileTwoData, key)) {
