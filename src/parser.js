@@ -1,12 +1,9 @@
-import path from 'path';
-import { readFileSync } from 'node:fs';
-
-const readJsonFile = (filePath) =>
-  JSON.parse(readFileSync(path.resolve(filePath), { encoding: 'utf-8' }));
+import { isYaml } from './utils/extensions.js';
+import { readJsonFile, readYamlFile } from './utils/readers.js';
 
 const parseFile = (fileOne, fileTwo) => ({
-  fileOneData: readJsonFile(fileOne),
-  fileTwoData: readJsonFile(fileTwo),
+  fileOneData: isYaml ? readYamlFile(fileOne) : readJsonFile(fileOne),
+  fileTwoData: isYaml ? readYamlFile(fileTwo) : readJsonFile(fileTwo),
 });
 
 export default parseFile;
