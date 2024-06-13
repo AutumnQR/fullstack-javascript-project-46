@@ -1,6 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/AutumnQR/fullstack-javascript-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/AutumnQR/fullstack-javascript-project-46/actions)
-![Github Action Status](https://github.com/AutumnQR/fullstack-javascript-project-46/actions/workflows/github-actions-demo.yml/badge.svg)
+![Github Action Status](https://github.com/AutumnQR/fullstack-javascript-project-46/actions/workflows/node.js.yml/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4bd168311b87623461cf/maintainability)](https://codeclimate.com/github/AutumnQR/fullstack-javascript-project-46/maintainability)
 # Project: Difference Calculator
 
