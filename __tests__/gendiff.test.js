@@ -1,11 +1,10 @@
 import { expect, test } from '@jest/globals';
-import genDiff from '../src/difference.js';
-import parseFile from '../src/parser.js';
 
-import path from 'path';
+import path, { dirname } from 'path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import parseFile from '../src/parser.js';
+import genDiff from '../src/difference.js';
 import { isYaml } from '../src/utils/extensions.js';
 import { readJsonFile, readYamlFile } from '../src/utils/readers.js';
 

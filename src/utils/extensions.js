@@ -3,6 +3,7 @@ import path from 'path';
 
 const YAML = ['.yml', '.yaml'];
 
-export const isYaml = (filePath) => {
-  return _.includes(YAML, path.extname(path.resolve(filePath)));
-};
+const isYaml = (filePath) =>
+  _.includes(YAML, path.extname(path.resolve(filePath)));
+
+export default isYaml;
