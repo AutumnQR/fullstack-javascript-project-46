@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 const genDiff = (data) => {
   const { fileOneData, fileTwoData } = data;
@@ -8,21 +8,21 @@ const genDiff = (data) => {
 
   const diff = allKeys.map((key) => {
     if (!_.has(fileTwoData, key)) {
-      return `- ${key}: ${fileOneData[key]}`;
+      return `  - ${key}: ${fileOneData[key]}`;
     }
     if (!_.has(fileOneData, key)) {
-      return `+ ${key}: ${fileTwoData[key]}`;
+      return `  + ${key}: ${fileTwoData[key]}`;
     }
     if (fileOneData[key] !== fileTwoData[key]) {
       return [
-        `- ${key}: ${fileOneData[key]}`,
-        `+ ${key}: ${fileTwoData[key]}`,
-      ].join("\n   ");
+        `  - ${key}: ${fileOneData[key]}`,
+        `  + ${key}: ${fileTwoData[key]}`,
+      ].join('\r\n');
     }
-    return `  ${key}: ${fileOneData[key]}`;
+    return `    ${key}: ${fileOneData[key]}`;
   });
 
-  return `{\n   ${diff.join("\n   ")}\n}`;
+  return `{\r\n${diff.join('\r\n')}\r\n}`;
 };
 
 export default genDiff;
