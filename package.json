@@ -6,7 +6,8 @@
   "main": "bin/gendiff.js",
   "scripts": {
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest",
-    "lint": "npx eslint . --fix"
+    "lint": "npx eslint . --fix",
+    "coverage": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest --coverage"
   },
   "bin": {
     "gendiff": "bin/gendiff.js"

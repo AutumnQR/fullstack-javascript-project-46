@@ -43,4 +43,4 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CCID }}
         with:
-          coverageCommand: npm test
+          coverageCommand: npm run coverage
