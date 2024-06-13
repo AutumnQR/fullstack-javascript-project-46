@@ -39,6 +39,7 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
+      - run: npm install --global yarn
       - run: npm test
       - uses: paambaati/codeclimate-action@v8.0.0
         env:
