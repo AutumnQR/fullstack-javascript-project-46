@@ -9,19 +9,22 @@ const genDiff = (data) => {
   const allKeys = _.sortBy(_.union(fileOneKeys, fileTwoKeys));
 
   const diff = allKeys.map((key) => {
-    if (!_.has(fileTwoData, key)) {
-      return `  - ${key}: ${fileOneData[key]}`;
+    const fileOneValue = fileOneData[key];
+    const fileTwoValue = fileTwoData[key];
+
+    switch (true) {
+      case !_.has(fileTwoData, key):
+        return `  - ${key}: ${fileOneValue}`;
+      case !_.has(fileOneData, key):
+        return `  + ${key}: ${fileTwoValue}`;
+      case fileOneValue !== fileTwoValue:
+        return [
+          `  - ${key}: ${fileOneValue}`,
+          `  + ${key}: ${fileTwoValue}`,
+        ].join('\r\n');
+      default:
+        return `    ${key}: ${fileOneValue}`;
     }
-    if (!_.has(fileOneData, key)) {
-      return `  + ${key}: ${fileTwoData[key]}`;
-    }
-    if (fileOneData[key] !== fileTwoData[key]) {
-      return [
-        `  - ${key}: ${fileOneData[key]}`,
-        `  + ${key}: ${fileTwoData[key]}`,
-      ].join('\r\n');
-    }
-    return `    ${key}: ${fileOneData[key]}`;
   });
 
   return `{\r\n${diff.join('\r\n')}\r\n}`;
