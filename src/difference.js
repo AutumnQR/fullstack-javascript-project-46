@@ -1,27 +1,16 @@
 import _ from 'lodash';
 import { stylish, stringify } from './utils/stylish.js';
 
-const handleObjects = (key, fileOneValue, fileTwoValue, depth) => {
-  return stylish(
-    `  ${key}: ${compareFiles(fileOneValue, fileTwoValue, depth + 1)}`,
-    depth,
-  );
-};
+const handleMissingKey = (key, value, depth, exp) =>
+  stylish(`${exp} ${key}: ${stringify(value, depth + 1)}`, depth);
 
-const handleMissingKey = (key, value, depth, exp) => {
-  return stylish(`${exp} ${key}: ${stringify(value, depth + 1)}`, depth);
-};
+const handleNotEqual = (key, fileOneValue, fileTwoValue, depth) => [
+  stylish(`- ${key}: ${stringify(fileOneValue, depth + 1)}`, depth),
+  stylish(`+ ${key}: ${stringify(fileTwoValue, depth + 1)}`, depth),
+];
 
-const handleNotEqual = (key, fileOneValue, fileTwoValue, depth) => {
-  return [
-    stylish(`- ${key}: ${stringify(fileOneValue, depth + 1)}`, depth),
-    stylish(`+ ${key}: ${stringify(fileTwoValue, depth + 1)}`, depth),
-  ];
-};
-
-const handleEqualFiles = (key, fileOneValue, depth) => {
-  return stylish(`  ${key}: ${stringify(fileOneValue, depth + 1)}`, depth);
-};
+const handleEqualFiles = (key, fileOneValue, depth) =>
+  stylish(`  ${key}: ${stringify(fileOneValue, depth + 1)}`, depth);
 
 const compareFiles = (fileOne, fileTwo, depth = 1) => {
   const allKeys = _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));
@@ -33,7 +22,10 @@ const compareFiles = (fileOne, fileTwo, depth = 1) => {
 
     switch (true) {
       case isObjects:
-        return handleObjects(key, fileOneValue, fileTwoValue, depth);
+        return stylish(
+          `  ${key}: ${compareFiles(fileOneValue, fileTwoValue, depth + 1)}`,
+          depth,
+        );
       case !isFileHaveKey(fileTwo):
         return handleMissingKey(key, fileOneValue, depth, '-');
       case !isFileHaveKey(fileOne):
