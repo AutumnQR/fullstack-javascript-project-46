@@ -14,14 +14,14 @@ const stylish = (value, depth = 1, spacesCount = 2) => {
 };
 
 const stringify = (value, depth = 1, spacesCount = 4) => {
-  const iter = (currentValue, depth) => {
+  const iter = (currentValue, iDepth) => {
     if (!_.isObject(currentValue)) return `${currentValue}`;
 
-    const currentIndent = ' '.repeat(depth * spacesCount);
-    const bracketIndent = ' '.repeat(depth * spacesCount - 4);
+    const currentIndent = ' '.repeat(iDepth * spacesCount);
+    const bracketIndent = ' '.repeat(iDepth * spacesCount - 4);
 
     const lines = Object.entries(currentValue).map(
-      ([key, val]) => `${currentIndent}${key}: ${iter(val, depth + 1)}`,
+      ([key, val]) => `${currentIndent}${key}: ${iter(val, iDepth + 1)}`,
     );
 
     return ['{', ...lines, `${bracketIndent}}`].join('\n');

@@ -14,7 +14,7 @@ const genDiff = (data) => {
       const fileOneValue = fileOne[key];
       const fileTwoValue = fileTwo[key];
 
-      // Возможно, этот участок кода не требуется, однако так код читается лучше
+      // Возможно, этот участок кода не требуется, однако так код (switch/case) читается лучше
       const isObjects = () =>
         _.isObject(fileOneValue) && _.isObject(fileTwoValue);
       const isFileHaveKey = (file) => _.has(file, key);
