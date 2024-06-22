@@ -9,4 +9,4 @@ Difference Calculator is my second project on the Hexlet learning platform, it c
 
 ## Asciinemas
 
-[![asciicast](https://asciinema.org/a/DFbix71BmVNvnJy83iN7gt5e0.svg)](https://asciinema.org/a/DFbix71BmVNvnJy83iN7gt5e0)
+[![asciicast](https://asciinema.org/a/VtdCNzuxnIVkcTds73gVsrSu4.svg)](https://asciinema.org/a/VtdCNzuxnIVkcTds73gVsrSu4)

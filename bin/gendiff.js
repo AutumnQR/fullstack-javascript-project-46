@@ -16,6 +16,6 @@ program
     console.log(diff);
   });
 
-program.option('-f, --format', 'output format');
+program.option('-f, --format [type]', 'output format', 'stylish');
 
 program.parse();
