@@ -5,11 +5,9 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'url';
 import parseFile from '../src/parser.js';
 import genDiff from '../src/difference.js';
-import isYaml from '../src/utils/extensions.js';
+import { isYaml } from '../src/utils/extensions.js';
 import { readJsonFile, readYamlFile } from '../src/utils/readers.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { getFixturePath, readFile } from '../src/utils/fixtures.js';
 
 describe('flat structures', () => {
   test('No change should be noticed', () => {
@@ -35,14 +33,11 @@ describe('flat structures', () => {
 
   test('Comparison of Hexlet response and program response', () => {
     const data = parseFile(
-      path.join(__dirname, '..', '__fixtures__', 'file1.json'),
-      path.join(__dirname, '..', '__fixtures__', 'file2.json'),
+      getFixturePath('file1.json'),
+      getFixturePath('file2.json'),
     );
 
-    const answer = readFileSync(
-      path.join(__dirname, '..', '__fixtures__', 'answer.txt'),
-      { encoding: 'utf-8' },
-    ).trim();
+    const answer = readFile('answer.txt');
 
     expect(genDiff(data)).toBe(answer);
   });
@@ -64,41 +59,38 @@ describe('flat structures', () => {
   });
 
   test('is Yaml file?', () => {
-    expect(
-      isYaml(path.join(__dirname, '..', '__fixtures__', 'file1.yaml')),
-    ).toBeTruthy();
-    expect(
-      isYaml(path.join(__dirname, '..', '__fixtures__', 'file1.json')),
-    ).toBeFalsy();
-    expect(
-      isYaml(path.join(__dirname, '..', '__fixtures__', 'answer.txt')),
-    ).toBeFalsy();
+    expect(isYaml(getFixturePath('file1.yaml'))).toBeTruthy();
+    expect(isYaml(getFixturePath('file1.json'))).toBeFalsy();
+    expect(isYaml(getFixturePath('answer.txt'))).toBeFalsy();
   });
 
   test('Correct parsing yaml files', () => {
-    const jsonData = readJsonFile(
-      path.join(__dirname, '..', '__fixtures__', 'file1.json'),
-    );
-
-    const yamlData = readYamlFile(
-      path.join(__dirname, '..', '__fixtures__', 'file1.yaml'),
-    );
+    const jsonData = readJsonFile(getFixturePath('file1.json'));
+    const yamlData = readYamlFile(getFixturePath('file1.yaml'));
 
     expect(jsonData).toEqual(yamlData);
   });
 });
 
 describe('nest structures', () => {
-  test('Comparison of Hexlet nested structure and program response', () => {
+  test('[JSON] Comparison of Hexlet nested structure and program response', () => {
     const data = parseFile(
-      path.join(__dirname, '..', '__fixtures__', 'file4.json'),
-      path.join(__dirname, '..', '__fixtures__', 'file5.json'),
+      getFixturePath('file4.json'),
+      getFixturePath('file5.json'),
     );
 
-    const answer = readFileSync(
-      path.join(__dirname, '..', '__fixtures__', 'nested_answer.txt'),
-      { encoding: 'utf-8' },
-    ).trim();
+    const answer = readFile('nested_answer.txt').trim();
+
+    expect(genDiff(data)).toBe(answer);
+  });
+
+  test('[YAML] Comparison of Hexlet nested structure and program response', () => {
+    const data = parseFile(
+      getFixturePath('file4.yaml'),
+      getFixturePath('file5.yaml'),
+    );
+
+    const answer = readFile('nested_answer.txt').trim();
 
     expect(genDiff(data)).toBe(answer);
   });

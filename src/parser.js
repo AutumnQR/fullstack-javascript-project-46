@@ -1,4 +1,4 @@
-import isYaml from './utils/extensions.js';
+import { isYaml } from './utils/extensions.js';
 import { readJsonFile, readYamlFile } from './utils/readers.js';
 
 const parseFile = (fileOne, fileTwo) => ({
