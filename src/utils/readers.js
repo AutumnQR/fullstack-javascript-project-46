@@ -6,4 +6,4 @@ export const readJsonFile = (filePath) =>
   JSON.parse(readFileSync(path.resolve(filePath), { encoding: 'utf-8' }));
 
 export const readYamlFile = (filePath) =>
-  yaml.load(readFileSync(path.resolve(filePath), 'utf-8'));
+  yaml.load(readFileSync(path.resolve(filePath), { encoding: 'utf-8' }));

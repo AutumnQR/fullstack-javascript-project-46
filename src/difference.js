@@ -1,33 +1,59 @@
 import _ from 'lodash';
+import { stylish, stringify } from './utils/stylish.js';
 
 const genDiff = (data) => {
   const { fileOneData, fileTwoData } = data;
 
-  const fileOneKeys = Object.keys(fileOneData);
-  const fileTwoKeys = Object.keys(fileTwoData);
+  const compareFiles = (fileOne, fileTwo, depth = 1) => {
+    const fileOneKeys = Object.keys(fileOne);
+    const fileTwoKeys = Object.keys(fileTwo);
 
-  const allKeys = _.sortBy(_.union(fileOneKeys, fileTwoKeys));
+    const allKeys = _.sortBy(_.union(fileOneKeys, fileTwoKeys));
 
-  const diff = allKeys.map((key) => {
-    const fileOneValue = fileOneData[key];
-    const fileTwoValue = fileTwoData[key];
+    const diff = allKeys.map((key) => {
+      const fileOneValue = fileOne[key];
+      const fileTwoValue = fileTwo[key];
 
-    switch (true) {
-      case !_.has(fileTwoData, key):
-        return `  - ${key}: ${fileOneValue}`;
-      case !_.has(fileOneData, key):
-        return `  + ${key}: ${fileTwoValue}`;
-      case fileOneValue !== fileTwoValue:
-        return [
-          `  - ${key}: ${fileOneValue}`,
-          `  + ${key}: ${fileTwoValue}`,
-        ].join('\r\n');
-      default:
-        return `    ${key}: ${fileOneValue}`;
-    }
-  });
+      // Возможно, этот участок кода не требуется, однако так код читается лучше
+      const isObjects = () =>
+        _.isObject(fileOneValue) && _.isObject(fileTwoValue);
+      const isFileHaveKey = (file) => _.has(file, key);
 
-  return `{\r\n${diff.join('\r\n')}\r\n}`;
+      switch (true) {
+        case isObjects():
+          return stylish(
+            `  ${key}: ${compareFiles(fileOneValue, fileTwoValue, depth + 1)}`,
+            depth,
+          );
+        case !isFileHaveKey(fileTwo):
+          return stylish(
+            `- ${key}: ${stringify(fileOneValue, depth + 1)}`,
+            depth,
+          );
+
+        case !isFileHaveKey(fileOne):
+          return stylish(
+            `+ ${key}: ${stringify(fileTwoValue, depth + 1)}`,
+            depth,
+          );
+
+        case fileOneValue !== fileTwoValue:
+          return [
+            stylish(`- ${key}: ${stringify(fileOneValue, depth + 1)}`, depth),
+            stylish(`+ ${key}: ${stringify(fileTwoValue, depth + 1)}`, depth),
+          ];
+        default:
+          return stylish(
+            `  ${key}: ${stringify(fileOneValue, depth + 1)}`,
+            depth,
+          );
+      }
+    });
+
+    return stylish(diff, depth);
+  };
+
+  return compareFiles(fileOneData, fileTwoData);
 };
 
 export default genDiff;
