@@ -13,7 +13,7 @@ const genDiff = (data, format) => {
     case 'json':
       return jsonFormat(fileOneData, fileTwoData);
     default:
-      throw Error('Undefined format value');
+      return stylish(fileOneData, fileTwoData);
   }
 };
 
