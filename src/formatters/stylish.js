@@ -1,8 +1,9 @@
 import _ from 'lodash';
 
 const formatValue = (value, depth = 1, spacesCount = 2) => {
+  const bracketSpaceCount = 4;
   const currentIndent = ' '.repeat(depth * spacesCount - 1);
-  const bracketIndent = ' '.repeat(depth * 4 - 4);
+  const bracketIndent = ' '.repeat(depth * bracketSpaceCount - 4);
 
   if (_.isArray(value)) {
     const lines = value.flat().map((val) => `${currentIndent}${val}`);
@@ -42,6 +43,8 @@ const handleEqualFiles = (key, fileOneValue, depth) =>
   formatValue(`  ${key}: ${stringify(fileOneValue, depth + 1)}`, depth);
 
 const stylish = (fileOne, fileTwo, depth = 1) => {
+  console.log(fileOne, fileTwo);
+  console.log(JSON.stringify(fileOne, fileTwo));
   const allKeys = _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));
 
   const diff = allKeys.map((key) => {
