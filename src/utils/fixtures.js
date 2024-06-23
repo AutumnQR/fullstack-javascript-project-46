@@ -6,7 +6,7 @@ import { isYaml, isJSON } from './extensions.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export const getFixturePath = (filename) => {
+const getFixturePath = (filename) => {
   switch (true) {
     case isYaml(filename):
       return path.join(__dirname, '..', '..', '__fixtures__', 'yaml', filename);
@@ -24,4 +24,6 @@ export const getFixturePath = (filename) => {
   }
 };
 
-export const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
+const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
+
+export { getFixturePath, readFile }

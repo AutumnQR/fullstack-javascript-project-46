@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import getAllKeys from '../utils/formatterUtil.js';
+import { getAllKeys, isObjects, isFileHaveKey } from '../utils/formatterUtil.js';
 
 const formatValue = (value) => {
   switch (true) {
@@ -30,15 +30,12 @@ const jsonFormat = (fileOne, fileTwo, newKey = '') => {
     const fullKey = newKey ? `${newKey}.${key}` : key;
     const [fileOneValue, fileTwoValue] = [fileOne[key], fileTwo[key]];
 
-    const isObjects = _.isObject(fileOneValue) && _.isObject(fileTwoValue);
-    const isFileHaveKey = (file) => _.has(file, key);
-
     switch (true) {
-      case isObjects:
+      case isObjects(fileOneValue, fileTwoValue):
         return jsonFormat(fileOneValue, fileTwoValue, fullKey);
-      case !isFileHaveKey(fileTwo):
+      case !isFileHaveKey(fileTwo, key):
         return handleMissingKey(fullKey, fileOneValue, '-');
-      case !isFileHaveKey(fileOne):
+      case !isFileHaveKey(fileOne, key):
         return handleMissingKey(fullKey, fileTwoValue, '+');
       case fileOneValue !== fileTwoValue:
         return handleNotEqual(fullKey, fileOneValue, fileTwoValue);
