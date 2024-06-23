@@ -1,5 +1,11 @@
 import _ from 'lodash';
-import { getAllKeys, isObjects, isFileHaveKey } from '../utils/formatterUtil.js';
+import {
+  getAllKeys,
+  isObjects,
+  isFileHaveKey,
+  getFullKey,
+  getValues,
+} from '../utils/formatterUtil.js';
 
 const formatValue = (value) => {
   switch (true) {
@@ -27,8 +33,8 @@ const jsonFormat = (fileOne, fileTwo, newKey = '') => {
   const allKeys = getAllKeys(fileOne, fileTwo);
 
   const diff = allKeys.map((key) => {
-    const fullKey = newKey ? `${newKey}.${key}` : key;
-    const [fileOneValue, fileTwoValue] = [fileOne[key], fileTwo[key]];
+    const fullKey = getFullKey(newKey, key);
+    const [fileOneValue, fileTwoValue] = getValues(fileOne, fileTwo, key);
 
     switch (true) {
       case isObjects(fileOneValue, fileTwoValue):

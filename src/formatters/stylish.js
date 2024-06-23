@@ -1,5 +1,9 @@
 import _ from 'lodash';
-import { getAllKeys, isFileHaveKey, isObjects } from '../utils/formatterUtil.js';
+import {
+  getAllKeys,
+  isFileHaveKey,
+  isObjects,
+} from '../utils/formatterUtil.js';
 
 const formatValue = (value, depth = 1, spacesCount = 2) => {
   const bracketSpaceCount = 4;
@@ -43,7 +47,6 @@ const handleEqualFiles = (key, fileOneValue, depth) => formatValue(`  ${key}: ${
 
 const stylish = (fileOne, fileTwo, depth = 1) => {
   const allKeys = getAllKeys(fileOne, fileTwo);
-
   const diff = allKeys.map((key) => {
     const [fileOneValue, fileTwoValue] = [fileOne[key], fileTwo[key]];
 
