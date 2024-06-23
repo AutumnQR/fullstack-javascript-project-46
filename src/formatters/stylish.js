@@ -49,19 +49,19 @@ const stylish = (fileOne, fileTwo, depth = 1) => {
     const isFileHaveKey = (file) => _.has(file, key);
 
     switch (true) {
-      case isObjects:
-        return formatValue(
-          `  ${key}: ${stylish(fileOneValue, fileTwoValue, depth + 1)}`,
-          depth,
-        );
-      case !isFileHaveKey(fileTwo):
-        return handleMissingKey(key, fileOneValue, depth, '-');
-      case !isFileHaveKey(fileOne):
-        return handleMissingKey(key, fileTwoValue, depth, '+');
-      case fileOneValue !== fileTwoValue:
-        return handleNotEqual(key, fileOneValue, fileTwoValue, depth);
-      default:
-        return handleEqualFiles(key, fileOneValue, depth);
+    case isObjects:
+      return formatValue(
+        `  ${key}: ${stylish(fileOneValue, fileTwoValue, depth + 1)}`,
+        depth,
+      );
+    case !isFileHaveKey(fileTwo):
+      return handleMissingKey(key, fileOneValue, depth, '-');
+    case !isFileHaveKey(fileOne):
+      return handleMissingKey(key, fileTwoValue, depth, '+');
+    case fileOneValue !== fileTwoValue:
+      return handleNotEqual(key, fileOneValue, fileTwoValue, depth);
+    default:
+      return handleEqualFiles(key, fileOneValue, depth);
     }
   });
 

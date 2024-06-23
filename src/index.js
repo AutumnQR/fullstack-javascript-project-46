@@ -7,14 +7,14 @@ const genDiff = (fileOne, fileTwo, format) => {
   const { fileOneData, fileTwoData } = parseFile(fileOne, fileTwo);
 
   switch (format || 'stylish') {
-    case 'stylish':
-      return stylish(fileOneData, fileTwoData);
-    case 'plain':
-      return plain(fileOneData, fileTwoData);
-    case 'json':
-      return jsonFormat(fileOneData, fileTwoData);
-    default:
-      return stylish(fileOneData, fileTwoData);
+  case 'stylish':
+    return stylish(fileOneData, fileTwoData);
+  case 'plain':
+    return plain(fileOneData, fileTwoData);
+  case 'json':
+    return jsonFormat(fileOneData, fileTwoData);
+  default:
+    return stylish(fileOneData, fileTwoData);
   }
 };
 
