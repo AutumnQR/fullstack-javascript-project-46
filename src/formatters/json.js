@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import getAllKeys from '../utils/formatterUtil.js';
 
 const formatValue = (value) => {
   switch (true) {
@@ -23,10 +24,9 @@ const handleNotEqual = (key, fileOneValue, fileTwoValue) => ({
 });
 
 const jsonFormat = (fileOne, fileTwo, newKey = '') => {
-  const allKeys = _.union(Object.keys(fileOne), Object.keys(fileTwo));
-  const sortedKeys = _.sortBy(allKeys);
+  const allKeys = getAllKeys(fileOne, fileTwo);
 
-  const diff = sortedKeys.map((key) => {
+  const diff = allKeys.map((key) => {
     const fullKey = newKey ? `${newKey}.${key}` : key;
     const [fileOneValue, fileTwoValue] = [fileOne[key], fileTwo[key]];
 
