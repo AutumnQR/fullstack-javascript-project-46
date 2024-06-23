@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
-const getAllKeys = (fileOne, fileTwo) => _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));
+const getAllKeys = (fileOne, fileTwo) => _.union(Object.keys(fileOne), Object.keys(fileTwo))
+const getSortedKeys = (fileOne, fileTwo) => _.sortBy(getAllKeys(fileOne, fileTwo));
 const isFileHaveKey = (file, key) => _.has(file, key);
 const isObjects = (fileOneValue, fileTwoValue) => _.isObject(fileOneValue) && _.isObject(fileTwoValue);
 
@@ -54,7 +55,7 @@ const handleNotEqual = (key, fileOneValue, fileTwoValue, isJson = false) => {
 };
 
 const generateDiff = (fileOne, fileTwo, newKey, handler, isJson = false) => {
-  const allKeys = getAllKeys(fileOne, fileTwo);
+  const allKeys = getSortedKeys(fileOne, fileTwo);
 
   return allKeys
     .map((key) => {
@@ -78,5 +79,5 @@ const generateDiff = (fileOne, fileTwo, newKey, handler, isJson = false) => {
 };
 
 export {
- getAllKeys, getValues, isFileHaveKey, isObjects, generateDiff 
+  getSortedKeys, getValues, isFileHaveKey, isObjects, generateDiff,
 };

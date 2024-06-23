@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {
-  getAllKeys,
+  getSortedKeys,
   isFileHaveKey,
   isObjects,
 } from '../utils/formatterUtil.js';
@@ -46,7 +46,7 @@ const handleNotEqual = (key, fileOneValue, fileTwoValue, depth) => [
 const handleEqualFiles = (key, fileOneValue, depth) => formatValue(`  ${key}: ${stringify(fileOneValue, depth + 1)}`, depth);
 
 const stylish = (fileOne, fileTwo, depth = 1) => {
-  const allKeys = getAllKeys(fileOne, fileTwo);
+  const allKeys = getSortedKeys(fileOne, fileTwo);
   const diff = allKeys.map((key) => {
     const [fileOneValue, fileTwoValue] = [fileOne[key], fileTwo[key]];
 

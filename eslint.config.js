@@ -55,6 +55,8 @@ export default [
       'implicit-arrow-linebreak': 'error',
       quotes: 'error',
       'object-curly-newline': 'error',
+      'no-trailing-spaces': 'error',
+      'comma-dangle': 'error',
     },
   },
 ];
