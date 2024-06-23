@@ -12,7 +12,8 @@ program
   .arguments('<filepath1> <filepath2>')
   .action((fileOne, fileTwo) => {
     const data = parseFile(fileOne, fileTwo);
-    const diff = genDiff(data);
+    const options = program.opts();
+    const diff = genDiff(data, options.format || 'stylish');
     console.log(diff);
   });
 
