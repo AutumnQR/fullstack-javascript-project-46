@@ -11,13 +11,11 @@ const formatValue = (value) => {
   }
 };
 
-const handleMissingKey = (key, value, exp) =>
-  `Property '${key}' was ${
+const handleMissingKey = (key, value, exp) => `Property '${key}' was ${
     exp === '-' ? 'removed' : `added with value: ${formatValue(value)}`
   }`;
 
-const handleNotEqual = (key, fileOneValue, fileTwoValue) =>
-  `Property '${key}' was updated. From ${formatValue(
+const handleNotEqual = (key, fileOneValue, fileTwoValue) => `Property '${key}' was updated. From ${formatValue(
     fileOneValue,
   )} to ${formatValue(fileTwoValue)}`;
 
