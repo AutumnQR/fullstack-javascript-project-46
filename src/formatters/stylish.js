@@ -43,8 +43,6 @@ const handleEqualFiles = (key, fileOneValue, depth) =>
   formatValue(`  ${key}: ${stringify(fileOneValue, depth + 1)}`, depth);
 
 const stylish = (fileOne, fileTwo, depth = 1) => {
-  console.log(fileOne, fileTwo, depth);
-  if (!fileOne || !fileTwo) return;
   const allKeys = _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));
 
   const diff = allKeys.map((key) => {

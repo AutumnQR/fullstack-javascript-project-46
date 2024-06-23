@@ -1,6 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
 
-import parseFile from '../src/parser.js';
 import genDiff from '../src/index.js';
 import { isYaml } from '../src/utils/extensions.js';
 import { readJsonFile, readYamlFile } from '../src/utils/readers.js';
@@ -68,26 +67,3 @@ describe('nest structures', () => {
     ).toBe(answer);
   });
 });
-
-// describe('JSON format', () => {
-//   test('Check alphabetical sorting', () => {
-//     const data = {
-//       fileOneData: { b: 1, d: 2, c: 3 },
-//       fileTwoData: {
-//         a: 1,
-//         b: 4,
-//         c: 3,
-//         e: 5,
-//       },
-//     };
-//
-//     const answer = [
-//       { key: 'a', status: 'added', value: 1 },
-//       { key: 'b', status: 'updated', from: 1, to: 4 },
-//       { key: 'd', status: 'removed' },
-//       { key: 'e', status: 'added', value: 5 },
-//     ];
-//
-//     expect(genDiff(data.fileOneData, data.fileTwoData, 'json')).toEqual(answer);
-//   });
-// });
