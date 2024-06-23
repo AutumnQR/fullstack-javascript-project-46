@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
 
 import parseFile from '../src/parser.js';
-import genDiff from '../src/difference.js';
+import genDiff from '../src/index.js';
 import { isYaml } from '../src/utils/extensions.js';
 import { readJsonFile, readYamlFile } from '../src/utils/readers.js';
 import { getFixturePath, readFile } from '../src/utils/fixtures.js';

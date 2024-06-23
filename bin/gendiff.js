@@ -2,7 +2,7 @@
 
 import { Command } from 'commander';
 import parseFile from '../src/parser.js';
-import genDiff from '../src/difference.js';
+import genDiff from '../src/index.js';
 
 const program = new Command();
 
