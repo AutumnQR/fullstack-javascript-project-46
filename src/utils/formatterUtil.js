@@ -3,7 +3,6 @@ import _ from 'lodash';
 const getAllKeys = (fileOne, fileTwo) => _.union(Object.keys(fileOne), Object.keys(fileTwo))
 const getSortedKeys = (fileOne, fileTwo) => _.sortBy(getAllKeys(fileOne, fileTwo));
 const isFileHaveKey = (file, key) => _.has(file, key);
-const isObjects = (fileOneValue, fileTwoValue) => _.isObject(fileOneValue) && _.isObject(fileTwoValue);
 
 const getFullKey = (newKey, key) => (newKey ? `${newKey}.${key}` : key);
 const getValues = (fileOne, fileTwo, key) => [fileOne[key], fileTwo[key]];
@@ -63,7 +62,7 @@ const generateDiff = (fileOne, fileTwo, newKey, handler, isJson = false) => {
       const [fileOneValue, fileTwoValue] = getValues(fileOne, fileTwo, key);
 
       switch (true) {
-        case isObjects(fileOneValue, fileTwoValue):
+        case _.isObject(fileOneValue) && _.isObject(fileTwoValue):
           return handler(fileOneValue, fileTwoValue, fullKey);
         case !isFileHaveKey(fileTwo, key):
           return handleMissingKey(fullKey, fileOneValue, '-', isJson);
@@ -79,5 +78,5 @@ const generateDiff = (fileOne, fileTwo, newKey, handler, isJson = false) => {
 };
 
 export {
-  getSortedKeys, getValues, isFileHaveKey, isObjects, generateDiff,
+  getSortedKeys, getValues, isFileHaveKey, generateDiff,
 };

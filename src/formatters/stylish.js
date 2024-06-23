@@ -2,7 +2,6 @@ import _ from 'lodash';
 import {
   getSortedKeys,
   isFileHaveKey,
-  isObjects,
 } from '../utils/formatterUtil.js';
 
 const formatValue = (value, depth = 1, spacesCount = 2) => {
@@ -51,7 +50,7 @@ const stylish = (fileOne, fileTwo, depth = 1) => {
     const [fileOneValue, fileTwoValue] = [fileOne[key], fileTwo[key]];
 
     switch (true) {
-      case isObjects(fileOneValue, fileTwoValue):
+      case _.isObject(fileOneValue) && _.isObject(fileTwoValue):
         return formatValue(
           `  ${key}: ${stylish(fileOneValue, fileTwoValue, depth + 1)}`,
           depth,
