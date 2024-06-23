@@ -23,9 +23,10 @@ const handleNotEqual = (key, fileOneValue, fileTwoValue) => ({
 });
 
 const jsonFormat = (fileOne, fileTwo, newKey = '') => {
-  const allKeys = _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));
+  const allKeys = _.union(Object.keys(fileOne), Object.keys(fileTwo));
+  const sortedKeys = _.sortBy(allKeys);
 
-  const diff = allKeys.map((key) => {
+  const diff = sortedKeys.map((key) => {
     const fullKey = newKey ? `${newKey}.${key}` : key;
     const [fileOneValue, fileTwoValue] = [fileOne[key], fileTwo[key]];
 
