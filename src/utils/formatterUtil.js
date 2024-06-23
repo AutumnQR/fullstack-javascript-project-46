@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const getAllKeys = (fileOne, fileTwo) => _.union(Object.keys(fileOne), Object.keys(fileTwo))
+const getAllKeys = (fileOne, fileTwo) => _.union(Object.keys(fileOne), Object.keys(fileTwo));
 const getSortedKeys = (fileOne, fileTwo) => _.sortBy(getAllKeys(fileOne, fileTwo));
 const isFileHaveKey = (file, key) => _.has(file, key);
 
