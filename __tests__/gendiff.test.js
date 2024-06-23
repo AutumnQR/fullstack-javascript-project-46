@@ -66,4 +66,14 @@ describe('nest structures', () => {
       ),
     ).toBe(answer);
   });
+
+  test('Valid JSON parsing', () => {
+    const data = genDiff(
+      getFixturePath('file4.json'),
+      getFixturePath('file5.json'),
+      'json',
+    );
+
+    expect(() => JSON.parse(data)).not.toThrow();
+  });
 });
