@@ -31,16 +31,14 @@ const stringify = (value, depth = 1, spacesCount = 4) => {
   return iter(value, depth);
 };
 
-const handleMissingKey = (key, value, depth, exp) =>
-  formatValue(`${exp} ${key}: ${stringify(value, depth + 1)}`, depth);
+const handleMissingKey = (key, value, depth, exp) => formatValue(`${exp} ${key}: ${stringify(value, depth + 1)}`, depth);
 
 const handleNotEqual = (key, fileOneValue, fileTwoValue, depth) => [
   formatValue(`- ${key}: ${stringify(fileOneValue, depth + 1)}`, depth),
   formatValue(`+ ${key}: ${stringify(fileTwoValue, depth + 1)}`, depth),
 ];
 
-const handleEqualFiles = (key, fileOneValue, depth) =>
-  formatValue(`  ${key}: ${stringify(fileOneValue, depth + 1)}`, depth);
+const handleEqualFiles = (key, fileOneValue, depth) => formatValue(`  ${key}: ${stringify(fileOneValue, depth + 1)}`, depth);
 
 const stylish = (fileOne, fileTwo, depth = 1) => {
   const allKeys = _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));

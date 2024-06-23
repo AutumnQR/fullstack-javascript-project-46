@@ -24,5 +24,4 @@ export const getFixturePath = (filename) => {
   }
 };
 
-export const readFile = (filename) =>
-  readFileSync(getFixturePath(filename), 'utf-8');
+export const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
