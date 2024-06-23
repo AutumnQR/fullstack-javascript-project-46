@@ -91,4 +91,15 @@ describe('nest structures', () => {
 
     expect(genDiff(data)).toBe(answer);
   });
+
+  test('Comparing plain style with Hexlet response', () => {
+    const data = parseFile(
+      getFixturePath('file4.json'),
+      getFixturePath('file5.json'),
+    );
+
+    const answer = readFile('nested_plain_answer.txt').trim();
+
+    expect(genDiff(data, 'plain')).toBe(answer);
+  });
 });
