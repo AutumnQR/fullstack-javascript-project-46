@@ -10,17 +10,17 @@ const formatValue = (value) => {
 };
 
 const handleMissingKey = (key, value, exp) => ({
-    key,
-    status: `${exp === '-' ? 'removed' : 'added'}`,
-    ...(exp === '+' && { value: formatValue(value) }),
-  });
+  key,
+  status: `${exp === '-' ? 'removed' : 'added'}`,
+  ...(exp === '+' && { value: formatValue(value) }),
+});
 
 const handleNotEqual = (key, fileOneValue, fileTwoValue) => ({
-    key,
-    status: 'updated',
-    from: formatValue(fileOneValue),
-    to: formatValue(fileTwoValue),
-  });
+  key,
+  status: 'updated',
+  from: formatValue(fileOneValue),
+  to: formatValue(fileTwoValue),
+});
 
 const jsonFormat = (fileOne, fileTwo, newKey = '') => {
   const allKeys = _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));
@@ -46,7 +46,7 @@ const jsonFormat = (fileOne, fileTwo, newKey = '') => {
     }
   });
 
-  return diff.flat().filter((item) => item !== null);
+  return JSON.stringify(diff.flat().filter((item) => item !== null));
 };
 
 export default jsonFormat;
