@@ -12,12 +12,12 @@ const formatValue = (value) => {
 };
 
 const handleMissingKey = (key, value, exp) => `Property '${key}' was ${
-    exp === '-' ? 'removed' : `added with value: ${formatValue(value)}`
-  }`;
+  exp === '-' ? 'removed' : `added with value: ${formatValue(value)}`
+}`;
 
 const handleNotEqual = (key, fileOneValue, fileTwoValue) => `Property '${key}' was updated. From ${formatValue(
-    fileOneValue,
-  )} to ${formatValue(fileTwoValue)}`;
+  fileOneValue,
+)} to ${formatValue(fileTwoValue)}`;
 
 const plain = (fileOne, fileTwo, newKey = '') => {
   const allKeys = _.sortBy(_.union(Object.keys(fileOne), Object.keys(fileTwo)));
