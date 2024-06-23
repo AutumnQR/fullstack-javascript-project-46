@@ -1,5 +1,6 @@
 import stylish from './formatters/stylish.js';
 import plain from './formatters/plain.js';
+import jsonFormat from './formatters/json.js';
 
 const genDiff = (data, format) => {
   const { fileOneData, fileTwoData } = data;
@@ -9,6 +10,8 @@ const genDiff = (data, format) => {
       return stylish(fileOneData, fileTwoData);
     case 'plain':
       return plain(fileOneData, fileTwoData);
+    case 'json':
+      return jsonFormat(fileOneData, fileTwoData);
     default:
       throw Error('Undefined format value');
   }

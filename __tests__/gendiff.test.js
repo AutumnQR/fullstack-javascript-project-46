@@ -103,3 +103,26 @@ describe('nest structures', () => {
     expect(genDiff(data, 'plain')).toBe(answer);
   });
 });
+
+describe('JSON format', () => {
+  test('Check alphabetical sorting', () => {
+    const data = {
+      fileOneData: { b: 1, d: 2, c: 3 },
+      fileTwoData: {
+        a: 1,
+        b: 4,
+        c: 3,
+        e: 5,
+      },
+    };
+
+    const answer = [
+      { key: 'a', status: 'added', value: 1 },
+      { key: 'b', status: 'updated', from: 1, to: 4 },
+      { key: 'd', status: 'removed' },
+      { key: 'e', status: 'added', value: 5 },
+    ];
+
+    expect(genDiff(data, 'json')).toEqual(answer);
+  });
+});
