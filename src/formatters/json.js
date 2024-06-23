@@ -2,10 +2,10 @@ import _ from 'lodash';
 
 const formatValue = (value) => {
   switch (true) {
-  case _.isObject(value):
-    return JSON.stringify(value);
-  default:
-    return value;
+    case _.isObject(value):
+      return JSON.stringify(value);
+    default:
+      return value;
   }
 };
 
@@ -33,16 +33,16 @@ const jsonFormat = (fileOne, fileTwo, newKey = '') => {
     const isFileHaveKey = (file) => _.has(file, key);
 
     switch (true) {
-    case isObjects:
-      return jsonFormat(fileOneValue, fileTwoValue, fullKey);
-    case !isFileHaveKey(fileTwo):
-      return handleMissingKey(fullKey, fileOneValue, '-');
-    case !isFileHaveKey(fileOne):
-      return handleMissingKey(fullKey, fileTwoValue, '+');
-    case fileOneValue !== fileTwoValue:
-      return handleNotEqual(fullKey, fileOneValue, fileTwoValue);
-    default:
-      return null;
+      case isObjects:
+        return jsonFormat(fileOneValue, fileTwoValue, fullKey);
+      case !isFileHaveKey(fileTwo):
+        return handleMissingKey(fullKey, fileOneValue, '-');
+      case !isFileHaveKey(fileOne):
+        return handleMissingKey(fullKey, fileTwoValue, '+');
+      case fileOneValue !== fileTwoValue:
+        return handleNotEqual(fullKey, fileOneValue, fileTwoValue);
+      default:
+        return null;
     }
   });
 

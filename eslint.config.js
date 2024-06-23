@@ -54,7 +54,6 @@ export default [
       'import/no-extraneous-dependencies': 'error',
       'implicit-arrow-linebreak': 'error',
       quotes: 'error',
-      indent: ['error', 2],
     },
   },
 ];
