@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "type": "module",
   "version": "1.0.0",
-  "description": "",
+  "description": "Difference Calculator",
   "main": "src/index.js",
   "scripts": {
     "test": "npx jest",
@@ -15,8 +15,6 @@
   "prettier": {
     "singleQuote": true
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@eslint/eslintrc": "^3.1.0",

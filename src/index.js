@@ -3,10 +3,10 @@ import plain from './formatters/plain.js';
 import jsonFormat from './formatters/json.js';
 import parseFile from './parser.js';
 
-const genDiff = (fileOne, fileTwo, format) => {
+const genDiff = (fileOne, fileTwo, format = 'stylish') => {
   const { fileOneData, fileTwoData } = parseFile(fileOne, fileTwo);
 
-  switch (format || 'stylish') {
+  switch (format) {
     case 'stylish':
       return stylish(fileOneData, fileTwoData);
     case 'plain':

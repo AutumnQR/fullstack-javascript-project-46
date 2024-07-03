@@ -12,7 +12,7 @@ program
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((fileOne, fileTwo) => {
     const options = program.opts();
-    const diff = genDiff(fileOne, fileTwo, options.format || 'stylish');
+    const diff = genDiff(fileOne, fileTwo, options.format);
     console.log(diff);
   });
 

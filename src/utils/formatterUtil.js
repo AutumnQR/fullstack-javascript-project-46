@@ -21,6 +21,7 @@ const formatValue = (value) => {
 const formatJsonValue = (value) => {
   switch (true) {
     case _.isObject(value):
+
       return JSON.stringify(value);
     case _.isString(value):
       return `"${value}"`;
